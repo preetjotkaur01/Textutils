@@ -27,6 +27,10 @@ export default function Textform(props) {
         console.log("On change")
         setText(events.target.value)
     }
+    const copyText = ()=>{
+      navigator.clipboard.writeText(Text);
+      props.showAlert("Text has been copied successfully")
+    }
     
     const [Text, setText] = useState('');
     //setText('New Text');
@@ -37,15 +41,16 @@ export default function Textform(props) {
       <div className="myBox my-3">
         <textarea className="form-control" style={{backgroundColor:props.mode==='dark'?'grey':'white'}} placeholder='Enter the Text' value={Text} onChange={handleOnChange} id="MyBox" rows="8"></textarea>  
     </div>
-    <button className="btn btn-dark" onClick={upperCase}>Convert to Uppercase</button>
-    <button className="btn btn-dark mx-2" onClick={lowerCase}>Convert to lowerCase</button>
-    <button className="btn btn-dark mx-2" onClick={clearText}>Clear Text</button>
+    <button disabled={Text.length===0} className="btn btn-dark mx-1 my-1" onClick={upperCase}>Convert to Uppercase</button>
+    <button disabled={Text.length===0} className="btn btn-dark mx-1 my-1" onClick={lowerCase}>Convert to lowerCase</button>
+    <button disabled={Text.length===0} className="btn btn-dark mx-1 my-1" onClick={clearText}>Clear Text</button>
+    <button disabled={Text.length===0} className="btn btn-dark mx-1 my-1" onClick={copyText}>Copy Text</button>
     </div>
     <div className='container my-2' >
-     <p>{Text.split(" ").length-1} words and {Text.length} characters</p>
+     <p>{Text.split(/\s+/).filter((element)=> {return element.length!==0}).length} words and {Text.length} characters</p>
     </div>
   </>
-    
+  // \s is the regular expression for white space.
   
   )
 }

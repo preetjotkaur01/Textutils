@@ -3,8 +3,8 @@ import './App.css';
 import About from './components/About';
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
-import React, { useState } from 'react';
 import Alert from './components/Alert';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
@@ -55,7 +55,7 @@ function App() {
     <div className='container'>
     <Routes>
           <Route path="/about"
-            element ={<About/>} >
+            element ={<About mode={mode} />} >
           </Route>
           <Route path="/"
            element = {<Textform heading="Enter Your Text" mode={mode} showAlert={showAlert}/>} >
